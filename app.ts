@@ -17,8 +17,8 @@ function generateGrid(gridSize: number) {
   const container = document.querySelector(".container");
   const SQUARE_EDGE = (CONTAINER_SIZE - gridSize * 2) / gridSize;
   for (let i = 0; i < gridSize; i++) {
-    const row = document.createElement("div");
-    row.classList.add("row");
+    const column = document.createElement("div");
+    column.classList.add("column");
     for (let j = 0; j < gridSize; j++) {
       const cell = document.createElement("div");
       cell.style.width = cell.style.height = `${SQUARE_EDGE}px`;
@@ -27,9 +27,9 @@ function generateGrid(gridSize: number) {
         cell.style.background = "#" + randomColor();
       });
       cell.classList.add("cell");
-      row.append(cell);
+      column.append(cell);
     }
-    container?.append(row);
+    container?.append(column);
   }
 }
 
