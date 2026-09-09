@@ -1,5 +1,6 @@
-const CONTAINER_SIZE = 640;
+const CONTAINER_SIZE = 700;
 const INITIAL_SIZE = 16;
+const SQUARE_BORDER = "1px solid black";
 
 function randomColor() {
   return Math.floor(Math.random() * 16777215).toString(16);
@@ -15,17 +16,20 @@ function isNumericString(str: string) {
 function generateGrid(gridSize: number) {
   const container = document.querySelector(".container");
   const SQUARE_EDGE = (CONTAINER_SIZE - gridSize * 2) / gridSize;
-  for (let i = 0; i < gridSize ** 2; i++) {
-    const squareDiv = document.createElement("div");
-    squareDiv.style.width = squareDiv.style.height = `${SQUARE_EDGE}px`;
-
-    console.log(SQUARE_EDGE);
-
-    squareDiv.style.border = "1px solid black";
-    squareDiv.addEventListener("mouseout", () => {
-      squareDiv.style.background = "#" + randomColor();
-    });
-    container?.append(squareDiv);
+  for (let i = 0; i < gridSize; i++) {
+    const row = document.createElement("div");
+    row.classList.add("row");
+    for (let j = 0; j < gridSize; j++) {
+      const cell = document.createElement("div");
+      cell.style.width = cell.style.height = `${SQUARE_EDGE}px`;
+      cell.style.border = SQUARE_BORDER;
+      cell.addEventListener("mouseout", () => {
+        cell.style.background = "#" + randomColor();
+      });
+      cell.classList.add("cell");
+      row.append(cell);
+    }
+    container?.append(row);
   }
 }
 
